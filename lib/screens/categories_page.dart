@@ -37,6 +37,9 @@ class _CategoryPageState extends State<CategoryPage> {
                       const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                   child: Column(
                     children: [
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.075,
+                      ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.end,
