@@ -107,6 +107,20 @@ class _CategoryPageState extends State<CategoryPage> {
                                 isGrid = newValue;
                               });
                             },
+                          ),
+                          const SizedBox(
+                            width: 20,
+                          ),
+                          Container(
+                            width: 25,
+                            height: 25,
+                            decoration: BoxDecoration(
+                                border: Border.all(color: Colors.white)),
+                            child: const Center(
+                                child: Icon(
+                              Icons.keyboard_arrow_down_outlined,
+                              color: Colors.white,
+                            )),
                           )
                         ],
                       ),
