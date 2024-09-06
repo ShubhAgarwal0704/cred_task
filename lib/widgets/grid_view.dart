@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 
 Widget buildGrid(DataProvider dataProvider) {
   return ListView.builder(
+    shrinkWrap: true,
     itemCount: dataProvider.sections?.length ?? 0,
     itemBuilder: (context, listIndex) {
       final section = dataProvider.sections![listIndex];

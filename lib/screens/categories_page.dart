@@ -1,3 +1,4 @@
+import 'package:animated_toggle_switch/animated_toggle_switch.dart';
 import 'package:cred_assignment/providers/category_provider.dart';
 import 'package:cred_assignment/utils/colors.dart';
 import 'package:cred_assignment/widgets/grid_view.dart';
@@ -33,7 +34,7 @@ class _CategoryPageState extends State<CategoryPage> {
             : Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                child: SafeArea(
+                child: SingleChildScrollView(
                   child: Column(
                     children: [
                       Row(
@@ -74,21 +75,45 @@ class _CategoryPageState extends State<CategoryPage> {
                             ),
                           ),
                           const Spacer(),
-                          IconButton(
-                            icon: Icon(isGrid ? Icons.list : Icons.grid_view,
-                                color: textColor),
-                            onPressed: () {
+                          AnimatedToggleSwitch.rolling(
+                            current: isGrid,
+                            values: const [false, true],
+                            iconList: [
+                              Icon(Icons.list_alt,
+                                  size: 25,
+                                  color: isGrid
+                                      ? Colors.transparent
+                                      : Colors.black),
+                              Icon(Icons.grid_view_rounded,
+                                  size: 25,
+                                  color: isGrid
+                                      ? Colors.black
+                                      : Colors.transparent),
+                            ],
+                            indicatorSize: const Size(25, 25),
+                            borderWidth: 1,
+                            inactiveOpacity: 0,
+                            fittingMode:
+                                FittingMode.preventHorizontalOverlapping,
+                            height: 26,
+                            style: ToggleStyle(
+                              backgroundColor: backgroundColor,
+                              indicatorColor: Colors.white,
+                              borderColor: Colors.white,
+                              borderRadius: BorderRadius.circular(0),
+                            ),
+                            onChanged: (bool newValue) {
                               setState(() {
-                                isGrid = !isGrid;
+                                isGrid = newValue;
                               });
                             },
-                          ),
+                          )
                         ],
                       ),
                       const SizedBox(
                         height: 10,
                       ),
-                      Expanded(
+                      SingleChildScrollView(
                         child: isGrid
                             ? buildGrid(dataProvider)
                             : buildList(dataProvider),
