@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 
 Widget buildList(DataProvider dataProvider) {
   return ListView.builder(
+    physics: const NeverScrollableScrollPhysics(),
     shrinkWrap: true,
     itemCount: dataProvider.sections?.length ?? 0,
     itemBuilder: (context, index) {

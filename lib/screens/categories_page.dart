@@ -31,10 +31,10 @@ class _CategoryPageState extends State<CategoryPage> {
                   color: subtextColor,
                 ),
               )
-            : Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                child: SingleChildScrollView(
+            : SingleChildScrollView(
+                child: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                   child: Column(
                     children: [
                       Row(
@@ -127,11 +127,9 @@ class _CategoryPageState extends State<CategoryPage> {
                       const SizedBox(
                         height: 10,
                       ),
-                      SingleChildScrollView(
-                        child: isGrid
-                            ? buildGrid(dataProvider)
-                            : buildList(dataProvider),
-                      ),
+                      isGrid
+                          ? buildGrid(dataProvider)
+                          : buildList(dataProvider),
                     ],
                   ),
                 ),
