@@ -11,12 +11,10 @@ dependencies:
   flutter:
     sdk: flutter
   google_fonts: ^6.2.1
-  group_grid_view: ^1.0.1
   http: ^1.2.2
   neopop: ^1.0.2
   provider: ^6.1.2
   shared_preferences: ^2.3.2
-  switcher_xlive: ^1.0.5
 
 dev_dependencies:
   flutter_test:

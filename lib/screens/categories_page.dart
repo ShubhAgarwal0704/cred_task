@@ -39,6 +39,7 @@ class _CategoryPageState extends State<CategoryPage> {
                     children: [
                       Row(
                         mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
                           const SizedBox(
                             height: 50,
@@ -54,7 +55,8 @@ class _CategoryPageState extends State<CategoryPage> {
                                   style: GoogleFonts.roboto(
                                     color: subtextColor,
                                     fontSize: 16,
-                                    fontWeight: FontWeight.w600,
+                                    letterSpacing: 1.5,
+                                    fontWeight: FontWeight.w700,
                                   ),
                                 ),
                               ),
@@ -65,9 +67,9 @@ class _CategoryPageState extends State<CategoryPage> {
                                   dataProvider.exploreCred!.templateProperties
                                           .header.subtitleTitle ??
                                       '',
-                                  style: GoogleFonts.roboto(
+                                  style: GoogleFonts.montserrat(
                                     color: textColor,
-                                    fontSize: 28,
+                                    fontSize: 30,
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
@@ -75,52 +77,59 @@ class _CategoryPageState extends State<CategoryPage> {
                             ),
                           ),
                           const Spacer(),
-                          AnimatedToggleSwitch.rolling(
-                            current: isGrid,
-                            values: const [false, true],
-                            iconList: [
-                              Icon(Icons.list_alt,
-                                  size: 25,
-                                  color: isGrid
-                                      ? Colors.transparent
-                                      : Colors.black),
-                              Icon(Icons.grid_view_rounded,
-                                  size: 25,
-                                  color: isGrid
-                                      ? Colors.black
-                                      : Colors.transparent),
-                            ],
-                            indicatorSize: const Size(25, 25),
-                            borderWidth: 1,
-                            inactiveOpacity: 0,
-                            fittingMode:
-                                FittingMode.preventHorizontalOverlapping,
-                            height: 26,
-                            style: ToggleStyle(
-                              backgroundColor: backgroundColor,
-                              indicatorColor: Colors.white,
-                              borderColor: Colors.white,
-                              borderRadius: BorderRadius.circular(0),
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 23),
+                            child: AnimatedToggleSwitch.rolling(
+                              current: isGrid,
+                              values: const [false, true],
+                              iconList: [
+                                Icon(Icons.list_alt,
+                                    size: 21,
+                                    color: isGrid
+                                        ? Colors.transparent
+                                        : Colors.black),
+                                Icon(Icons.grid_view_rounded,
+                                    size: 21,
+                                    color: isGrid
+                                        ? Colors.black
+                                        : Colors.transparent),
+                              ],
+                              indicatorSize: const Size(21, 21),
+                              borderWidth: 1,
+                              inactiveOpacity: 0,
+                              fittingMode:
+                                  FittingMode.preventHorizontalOverlapping,
+                              height: 21,
+                              style: ToggleStyle(
+                                backgroundColor: backgroundColor,
+                                indicatorColor: Colors.white,
+                                borderColor: Colors.white,
+                                borderRadius: BorderRadius.circular(0),
+                              ),
+                              onChanged: (bool newValue) {
+                                setState(() {
+                                  isGrid = newValue;
+                                });
+                              },
                             ),
-                            onChanged: (bool newValue) {
-                              setState(() {
-                                isGrid = newValue;
-                              });
-                            },
                           ),
                           const SizedBox(
-                            width: 20,
+                            width: 32,
                           ),
-                          Container(
-                            width: 25,
-                            height: 25,
-                            decoration: BoxDecoration(
-                                border: Border.all(color: Colors.white)),
-                            child: const Center(
-                                child: Icon(
-                              Icons.keyboard_arrow_down_outlined,
-                              color: Colors.white,
-                            )),
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 23),
+                            child: Container(
+                              width: 21,
+                              height: 21,
+                              decoration: BoxDecoration(
+                                  border: Border.all(color: Colors.white)),
+                              child: const Center(
+                                  child: Icon(
+                                size: 20,
+                                Icons.keyboard_arrow_down_outlined,
+                                color: Colors.white,
+                              )),
+                            ),
                           )
                         ],
                       ),

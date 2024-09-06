@@ -22,7 +22,7 @@ Widget buildList(DataProvider dataProvider) {
               section.templateProperties.header.title,
               style: const TextStyle(
                   color: subtextColor,
-                  fontSize: 16,
+                  fontSize: 14,
                   fontWeight: FontWeight.bold),
             ),
           ),
