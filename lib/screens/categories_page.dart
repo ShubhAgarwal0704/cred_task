@@ -1,8 +1,7 @@
 import 'package:animated_toggle_switch/animated_toggle_switch.dart';
+import 'package:cred_assignment/models/api_response_model.dart';
 import 'package:cred_assignment/providers/category_provider.dart';
 import 'package:cred_assignment/utils/colors.dart';
-import 'package:cred_assignment/widgets/grid_view.dart';
-import 'package:cred_assignment/widgets/list_view.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -136,12 +135,213 @@ class _CategoryPageState extends State<CategoryPage> {
                           )
                         ],
                       ),
-                      const SizedBox(
-                        height: 10,
+                      const SizedBox(height: 20),
+                      ListView.builder(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemCount: dataProvider.sections?.length ?? 0,
+                        itemBuilder: (context, listIndex) {
+                          final section = dataProvider.sections![listIndex];
+
+                          return Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: 4,
+                                  horizontal: 16,
+                                ),
+                                child: Text(
+                                  section.templateProperties.header.title,
+                                  style: const TextStyle(
+                                      color: subtextColor,
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 20,
+                              ),
+                              SizedBox(
+                                height: isGrid
+                                    ? ((section.templateProperties.items!
+                                                    .length +
+                                                1) *
+                                            50)
+                                        .toDouble()
+                                    : (section.templateProperties.items!
+                                                .length *
+                                            120)
+                                        .toDouble(),
+                                child: Stack(
+                                  children: section.templateProperties.items!
+                                      .asMap()
+                                      .entries
+                                      .map((entry) {
+                                    int index = entry.key;
+                                    Item item = entry.value;
+                                    double itemWidth =
+                                        MediaQuery.of(context).size.width /
+                                            (isGrid ? 3 : 1);
+                                    double itemHeight = 120;
+
+                                    return AnimatedPositioned(
+                                      duration:
+                                          const Duration(milliseconds: 500),
+                                      curve: Curves.easeInOut,
+                                      left:
+                                          isGrid ? (index % 3) * itemWidth : 0,
+                                      top: isGrid
+                                          ? (index ~/ 3) * itemHeight
+                                          : index * itemHeight,
+                                      right: 2,
+                                      child: AnimatedOpacity(
+                                        duration:
+                                            const Duration(milliseconds: 500),
+                                        opacity: 1.0,
+                                        child: SizedBox(
+                                          width: itemWidth,
+                                          height: itemHeight,
+                                          child: isGrid
+                                              ? Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 16),
+                                                  child: Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Container(
+                                                        width: 84,
+                                                        height: 84,
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          border: Border.all(
+                                                              color:
+                                                                  borderColor,
+                                                              width: 1.5),
+                                                        ),
+                                                        child: ClipRRect(
+                                                          child: Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .all(20.0),
+                                                            child:
+                                                                Image.network(
+                                                              item.displayData
+                                                                  .iconUrl,
+                                                              fit: BoxFit.cover,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      const SizedBox(height: 8),
+                                                      Text(
+                                                          item.displayData.name,
+                                                          textAlign:
+                                                              TextAlign.center,
+                                                          style: GoogleFonts
+                                                              .poppins(
+                                                                  color:
+                                                                      textColor,
+                                                                  fontSize: 10,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .normal)),
+                                                    ],
+                                                  ),
+                                                )
+                                              : Row(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Padding(
+                                                      padding: const EdgeInsets
+                                                          .symmetric(
+                                                          horizontal: 16),
+                                                      child: Container(
+                                                        width: 84,
+                                                        height: 84,
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          border: Border.all(
+                                                              color:
+                                                                  borderColor,
+                                                              width: 1.5),
+                                                        ),
+                                                        child: Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(20),
+                                                          child: ClipRRect(
+                                                            child:
+                                                                Image.network(
+                                                              item.displayData
+                                                                  .iconUrl,
+                                                              fit: BoxFit
+                                                                  .fitHeight,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    Expanded(
+                                                      child: Column(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .center,
+                                                        children: [
+                                                          Text(
+                                                              item.displayData
+                                                                  .name,
+                                                              style: GoogleFonts.poppins(
+                                                                  color:
+                                                                      textColor,
+                                                                  fontSize: 14,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold)),
+                                                          const SizedBox(
+                                                              height: 4),
+                                                          Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .only(
+                                                                    right: 30),
+                                                            child: Text(
+                                                                item.displayData
+                                                                    .description,
+                                                                style: GoogleFonts.poppins(
+                                                                    color:
+                                                                        subtextColor,
+                                                                    fontSize:
+                                                                        12,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .normal)),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                        ),
+                                      ),
+                                    );
+                                  }).toList(),
+                                ),
+                              )
+                            ],
+                          );
+                        },
                       ),
-                      isGrid
-                          ? buildGrid(dataProvider)
-                          : buildList(dataProvider),
                     ],
                   ),
                 ),
