@@ -37,8 +37,7 @@ class _HomePageState extends State<HomePage> {
           // Wavey design
           Image.asset(waveyLine, width: double.maxFinite),
           Padding(
-            padding:
-                EdgeInsets.all(screenWidth * 0.05), // Dynamically set padding
+            padding: EdgeInsets.all(screenWidth * 0.05),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.end,
@@ -47,17 +46,17 @@ class _HomePageState extends State<HomePage> {
                     ? SizedBox(height: screenHeight * 0.15)
                     : Image.network(
                         categoryProvider.selectedCategoryImageURL.toString(),
-                        height: screenHeight * 0.15, // Dynamic image height
+                        height: screenHeight * 0.15,
                         fit: BoxFit.fitHeight,
                       ),
-                SizedBox(height: screenHeight * 0.1), // Dynamic space
+                SizedBox(height: screenHeight * 0.1),
                 categoryProvider.selectedCategoryTitle == null
                     ? const Text("")
                     : Text(
                         categoryProvider.selectedCategoryTitle.toString(),
                         style: GoogleFonts.poppins(
                           color: textColor,
-                          fontSize: screenWidth * 0.05, // Dynamic font size
+                          fontSize: screenWidth * 0.05,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -68,12 +67,12 @@ class _HomePageState extends State<HomePage> {
                         categoryProvider.selectedCategoryDescription.toString(),
                         style: GoogleFonts.tinos(
                           color: subtextColor2,
-                          fontSize: screenWidth * 0.06, // Dynamic font size
+                          fontSize: screenWidth * 0.06,
                           letterSpacing: 0.75,
                           fontWeight: FontWeight.w100,
                         ),
                       ),
-                SizedBox(height: screenHeight * 0.05), // Dynamic space
+                SizedBox(height: screenHeight * 0.05),
                 NeoPopButton(
                   color: Colors.white,
                   onTapUp: () {
@@ -85,22 +84,19 @@ class _HomePageState extends State<HomePage> {
                   child: Padding(
                     padding: EdgeInsets.symmetric(
                         horizontal: screenWidth * 0.04,
-                        vertical:
-                            screenHeight * 0.02), // Dynamic button padding
+                        vertical: screenHeight * 0.02),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(goToCategories,
                             style: GoogleFonts.poppins(
                               color: buttonTextColor,
-                              fontSize:
-                                  screenWidth * 0.045, // Dynamic font size
+                              fontSize: screenWidth * 0.045,
                               fontWeight: FontWeight.bold,
                             )),
-                        SizedBox(width: screenWidth * 0.02), // Dynamic spacing
+                        SizedBox(width: screenWidth * 0.02),
                         Icon(Icons.arrow_forward_sharp,
-                            color: Colors.black,
-                            size: screenWidth * 0.05), // Dynamic icon size
+                            color: Colors.black, size: screenWidth * 0.05),
                       ],
                     ),
                   ),

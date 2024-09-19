@@ -1,4 +1,6 @@
 import 'package:animated_toggle_switch/animated_toggle_switch.dart';
+import 'package:cred_assignment/components/grib_build.dart';
+import 'package:cred_assignment/components/list_build.dart';
 import 'package:cred_assignment/models/api_response_model.dart';
 import 'package:cred_assignment/providers/category_provider.dart';
 import 'package:cred_assignment/utils/colors.dart';
@@ -189,7 +191,7 @@ class _CategoryPageState extends State<CategoryPage> {
 
                                     return AnimatedPositioned(
                                       duration:
-                                          const Duration(milliseconds: 800),
+                                          const Duration(milliseconds: 300),
                                       curve: Curves.easeInOut,
                                       left:
                                           isGrid ? (index % 3) * itemWidth : 0,
@@ -199,7 +201,7 @@ class _CategoryPageState extends State<CategoryPage> {
                                       right: 2,
                                       child: AnimatedOpacity(
                                         duration:
-                                            const Duration(milliseconds: 500),
+                                            const Duration(milliseconds: 300),
                                         opacity: 1,
                                         curve: Curves.bounceIn,
                                         child: SizedBox(
@@ -218,161 +220,15 @@ class _CategoryPageState extends State<CategoryPage> {
                                               Navigator.of(context).pop();
                                             },
                                             child: isGrid
-                                                ? Padding(
-                                                    padding: EdgeInsets.only(
-                                                      left: screenWidth * 0.04,
-                                                    ),
-                                                    child: Column(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceEvenly,
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        Container(
-                                                          width:
-                                                              screenWidth * 0.2,
-                                                          height:
-                                                              screenWidth * 0.2,
-                                                          decoration:
-                                                              BoxDecoration(
-                                                            border: Border.all(
-                                                                color:
-                                                                    borderColor,
-                                                                width: 1.5),
-                                                          ),
-                                                          child: ClipRRect(
-                                                            child: Padding(
-                                                              padding:
-                                                                  EdgeInsets.all(
-                                                                      screenWidth *
-                                                                          0.04),
-                                                              child:
-                                                                  Image.network(
-                                                                item.displayData
-                                                                    .iconUrl,
-                                                                fit: BoxFit
-                                                                    .cover,
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        ),
-                                                        SizedBox(
-                                                            height:
-                                                                screenHeight *
-                                                                    0.01),
-                                                        Expanded(
-                                                          child: Text(
-                                                              item.displayData
-                                                                  .name,
-                                                              textAlign:
-                                                                  TextAlign
-                                                                      .center,
-                                                              style: GoogleFonts.poppins(
-                                                                  color:
-                                                                      textColor,
-                                                                  fontSize:
-                                                                      screenWidth *
-                                                                          0.0275,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .normal)),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  )
-                                                : Row(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      Padding(
-                                                        padding: EdgeInsets
-                                                            .symmetric(
-                                                                horizontal:
-                                                                    screenWidth *
-                                                                        0.04),
-                                                        child: Container(
-                                                          width:
-                                                              screenWidth * 0.2,
-                                                          height:
-                                                              screenWidth * 0.2,
-                                                          decoration:
-                                                              BoxDecoration(
-                                                            border: Border.all(
-                                                                color:
-                                                                    borderColor,
-                                                                width: 1.5),
-                                                          ),
-                                                          child: Padding(
-                                                            padding:
-                                                                EdgeInsets.all(
-                                                                    screenWidth *
-                                                                        0.04),
-                                                            child:
-                                                                Image.network(
-                                                              item.displayData
-                                                                  .iconUrl,
-                                                              fit: BoxFit
-                                                                  .fitHeight,
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      Expanded(
-                                                        child: Column(
-                                                          crossAxisAlignment:
-                                                              CrossAxisAlignment
-                                                                  .start,
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .start,
-                                                          children: [
-                                                            SizedBox(
-                                                              height:
-                                                                  itemHeight *
-                                                                      0.1,
-                                                            ),
-                                                            Text(
-                                                                item.displayData
-                                                                    .name,
-                                                                style: GoogleFonts.poppins(
-                                                                    color:
-                                                                        textColor,
-                                                                    fontSize:
-                                                                        screenWidth *
-                                                                            0.04,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .bold)),
-                                                            SizedBox(
-                                                                height:
-                                                                    screenHeight *
-                                                                        0.005),
-                                                            Padding(
-                                                              padding: EdgeInsets.only(
-                                                                  right:
-                                                                      screenWidth *
-                                                                          0.08),
-                                                              child: Text(
-                                                                  item.displayData
-                                                                      .description,
-                                                                  style: GoogleFonts.poppins(
-                                                                      color:
-                                                                          subtextColor,
-                                                                      fontSize:
-                                                                          screenWidth *
-                                                                              0.03,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .normal)),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
+                                                ? GridBuild(
+                                                    screenWidth: screenWidth,
+                                                    item: item,
+                                                    screenHeight: screenHeight)
+                                                : ListBuild(
+                                                    screenWidth: screenWidth,
+                                                    item: item,
+                                                    itemHeight: itemHeight,
+                                                    screenHeight: screenHeight),
                                           ),
                                         ),
                                       ),
